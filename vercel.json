@@ -35,7 +35,16 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js))",
+      "source": "/(.*)\\.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.js",
       "headers": [
         {
           "key": "Cache-Control",
