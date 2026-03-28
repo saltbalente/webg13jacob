@@ -4,7 +4,7 @@
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://amarresdeamoryendulzamientos.brujero.org/</loc>
-    <lastmod>2026-03-27</lastmod>
+    <lastmod>2026-03-28</lastmod>
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/brujeria-poderosa.jpg</image:loc></image:image>
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/tarot-profesional.jpg</image:loc></image:image>
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/brujo-jacob-poder.jpg</image:loc></image:image>
@@ -25,5 +25,10 @@
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/testimonial-2.jpg</image:loc></image:image>
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/testimonial-3.jpg</image:loc></image:image>
     <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/brujo-jacob-og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amarresdeamoryendulzamientos.brujero.org/guia-tipos-de-amarres/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <image:image><image:loc>https://amarresdeamoryendulzamientos.brujero.org/images/brujeria-3.jpg</image:loc></image:image>
   </url>
 </urlset>
