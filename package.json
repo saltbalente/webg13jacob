@@ -1,0 +1,8 @@
+{
+  "name": "webg13jacob",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate_sitemaps.js",
+    "generate:sitemaps": "node scripts/generate_sitemaps.js"
+  }
+}

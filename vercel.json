@@ -1,6 +1,8 @@
 {
   "version": 2,
   "name": "brujo-jacob-website",
+  "buildCommand": "npm run generate:sitemaps",
+  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
