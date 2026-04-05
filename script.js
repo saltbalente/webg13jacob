@@ -1,6 +1,6 @@
 // ===== CONFIGURACIÓN GLOBAL =====
 const CONFIG = {
-  whatsappNumber: '13033068798',
+  whatsappNumber: '12253607317',
   whatsappBaseUrl: 'https://wa.me',
   animationDuration: 300,
   scrollThreshold: 100
