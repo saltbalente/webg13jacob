@@ -61,6 +61,29 @@ const Utils = {
   generateWhatsAppUrl(message = 'NECESITO AYUDA') {
     const encodedMessage = encodeURIComponent(message);
     return `${CONFIG.whatsappBaseUrl}/${CONFIG.whatsappNumber}?text=${encodedMessage}`;
+  },
+
+  hasPaidConsultationAccess() {
+    try {
+      const raw = sessionStorage.getItem('jacob_consulta_payment_approved') || localStorage.getItem('jacob_consulta_payment_approved');
+      if (!raw) return false;
+      const access = JSON.parse(raw);
+      if (!access?.approvedAt) return false;
+      const approvedAt = new Date(access.approvedAt).getTime();
+      const maxAgeMs = 1000 * 60 * 60 * 24 * 7;
+      return Number.isFinite(approvedAt) && Date.now() - approvedAt <= maxAgeMs;
+    } catch (_error) {
+      return false;
+    }
+  },
+
+  hideWhatsAppUntilPaid() {
+    if (this.hasPaidConsultationAccess()) return;
+
+    document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"], .phone-container, .whatsapp-form, #whatsapp-container').forEach((element) => {
+      element.hidden = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
   }
 };
 
@@ -251,6 +274,11 @@ class WhatsAppForm {
   }
 
   setupFormHandlers() {
+    Utils.hideWhatsAppUntilPaid();
+
+    // Si la consulta no está pagada, no conectamos acciones directas a WhatsApp.
+    if (!Utils.hasPaidConsultationAccess()) return;
+
     // Formulario principal
     const sendButton = document.getElementById('sendMessage');
     if (sendButton) {
@@ -488,6 +516,7 @@ class App {
 
   onDOMReady() {
     console.log('🔮 Brujo Jacob - Sitio web cargado correctamente');
+    Utils.hideWhatsAppUntilPaid();
     
     // Generar palabras aleatorias
     this.wordGenerator.populateContainer('wordsContainer');

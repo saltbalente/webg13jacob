@@ -9,7 +9,42 @@
     maximumFractionDigits: 0
   }).format(CONSULTA_AMOUNT_COP);
 
+  const PAID_ACCESS_KEY = 'jacob_consulta_payment_approved';
   const $ = (selector) => document.querySelector(selector);
+
+  function getPaidAccess() {
+    try {
+      const raw = sessionStorage.getItem(PAID_ACCESS_KEY) || localStorage.getItem(PAID_ACCESS_KEY);
+      if (!raw) return null;
+      const access = JSON.parse(raw);
+      if (!access?.approvedAt) return null;
+      const approvedAt = new Date(access.approvedAt).getTime();
+      const maxAgeMs = 1000 * 60 * 60 * 24 * 7;
+      if (!Number.isFinite(approvedAt) || Date.now() - approvedAt > maxAgeMs) return null;
+      return access;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function savePaidAccess(reference, transactionId) {
+    const access = JSON.stringify({
+      reference: reference || '',
+      transactionId: transactionId || '',
+      approvedAt: new Date().toISOString()
+    });
+    sessionStorage.setItem(PAID_ACCESS_KEY, access);
+    localStorage.setItem(PAID_ACCESS_KEY, access);
+  }
+
+  function gateDirectWhatsAppButtons() {
+    if (getPaidAccess()) return;
+    document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"], .phone-container, .whatsapp-form, #whatsapp-container').forEach((element) => {
+      if (element.id === 'consulta-whatsapp-link') return;
+      element.hidden = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
+  }
 
   function setText(selector, value) {
     const node = $(selector);
@@ -162,15 +197,17 @@
 
     if (!transactionId) {
       showPanel('consulta-pending-panel');
-      showStatus('Wompi todavía no envió el ID de transacción. Si ya pagaste, vuelve desde el comprobante de Wompi o escríbenos por WhatsApp con la referencia.', 'info');
+      showStatus('Wompi todavía no envió el ID de transacción. Si ya pagaste, vuelve desde el comprobante de Wompi para completar la validación.', 'info');
       return;
     }
 
     try {
       const transaction = await fetchTransaction(transactionId);
       if (transactionIsApproved(transaction, reference)) {
+        const approvedReference = reference || transaction.reference;
+        savePaidAccess(approvedReference, transactionId);
         showPanel('consulta-approved-panel');
-        initApprovedConsultationForm(reference || transaction.reference, transactionId);
+        initApprovedConsultationForm(approvedReference, transactionId);
         showStatus('Pago aprobado y validado. Ahora completa los datos de consulta.', 'success');
         return;
       }
@@ -185,11 +222,12 @@
       showStatus('El pago aún está pendiente en Wompi. Actualiza esta página en unos minutos.', 'info');
     } catch (error) {
       showPanel('consulta-pending-panel');
-      showStatus('No se pudo validar la transacción en este momento. Actualiza la página o escríbenos por WhatsApp con la referencia.', 'error');
+      showStatus('No se pudo validar la transacción en este momento. Actualiza la página para intentar validar el pago nuevamente.', 'error');
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    gateDirectWhatsAppButtons();
     initCheckoutPage();
     initConfirmationPage();
   });
