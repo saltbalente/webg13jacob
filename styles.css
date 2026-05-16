@@ -1220,9 +1220,79 @@ section.container img {
 }
 
 .consulta-form label:has(textarea),
+.consulta-payment-selector,
 .consulta-form button,
 .consulta-form-note {
   grid-column: 1 / -1;
+}
+
+.consulta-payment-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0.15rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.consulta-payment-selector legend {
+  grid-column: 1 / -1;
+  margin-bottom: 0.15rem;
+  color: #fff3b0;
+  font-weight: 900;
+}
+
+.consulta-payment-option {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 0.75rem !important;
+  min-height: 78px;
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 215, 0, 0.32);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.consulta-payment-option:hover,
+.consulta-payment-option.is-selected {
+  border-color: rgba(255, 215, 0, 0.82);
+  background: rgba(255, 215, 0, 0.10);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.10);
+}
+
+.consulta-payment-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.consulta-payment-option__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  color: #190000;
+  background: linear-gradient(135deg, #fff6bf, var(--gold-primary));
+}
+
+.consulta-payment-option strong,
+.consulta-payment-option small {
+  display: block;
+}
+
+.consulta-payment-option strong {
+  color: #fff8df;
+}
+
+.consulta-payment-option small {
+  color: #f2dfad;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .consulta-form input,
@@ -1395,6 +1465,7 @@ section.container img {
 
   .consulta-grid,
   .consulta-form,
+  .consulta-payment-selector,
   .consulta-meta-grid {
     grid-template-columns: 1fr;
   }

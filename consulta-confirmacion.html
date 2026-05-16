@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex,nofollow">
     <meta name="description" content="Confirmación de pago de consulta privada con el Maestro Jacob.">
     <title>Confirmación de consulta | Maestro Jacob</title>
-    <link rel="stylesheet" href="./styles.css?v=consulta-ui-20260515b">
+    <link rel="stylesheet" href="./styles.css?v=payment-selector-20260515">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -17,7 +17,7 @@
             <a class="phone-link" href="https://wa.me/12253607317?text=HOLA%20BRUJO%20JACOB">+1 (225) 536-0731</a>
             <div class="call-icon"><i class="fab fa-whatsapp"></i></div>
         </div>
-        <div class="description2">Validación Wompi</div>
+        <div class="description2">Validación de pago</div>
     </header>
 
     <main class="main-container consulta-page">
@@ -29,7 +29,7 @@
             <p class="consulta-kicker">Estado de pago</p>
             <h1>Validación de tu consulta</h1>
             <div class="consulta-meta-grid">
-                <p>Referencia Wompi: <strong data-consulta-reference>No recibida</strong></p>
+                <p>Referencia de pago: <strong data-consulta-reference>No recibida</strong></p>
                 <p>Valor esperado: <strong data-consulta-amount>USD $10</strong></p>
             </div>
             <p id="consulta-status" class="consulta-status" hidden></p>
@@ -45,7 +45,7 @@
             <div class="consulta-progress-step is-active">
                 <span>2</span>
                 <strong>Validación</strong>
-                <small>Pago Wompi</small>
+                <small>Pago elegido</small>
             </div>
             <div class="consulta-progress-line"></div>
             <div class="consulta-progress-step">
@@ -60,7 +60,7 @@
                 <span class="consulta-icon-pill"><i class="fa-solid fa-spinner"></i></span>
                 <div>
                     <h2>Verificando pago...</h2>
-                    <p>Estamos consultando el estado de la transacción en Wompi.</p>
+                    <p>Estamos consultando el estado de la transacción de pago.</p>
                 </div>
             </div>
         </section>
@@ -109,7 +109,7 @@
                 <span class="consulta-icon-pill"><i class="fa-solid fa-clock"></i></span>
                 <div>
                     <h2>Pago pendiente</h2>
-                    <p>Wompi todavía no confirma el pago como aprobado. Actualiza esta página en unos minutos.</p>
+                    <p>El pago todavía no aparece validado. Si pagaste por Wompi, actualiza esta página en unos minutos. Si pagaste por PayPal, conserva la referencia para validación manual.</p>
                 </div>
             </div>
             <a class="consulta-secondary-button" href="./consulta.html">Intentar de nuevo</a>
@@ -131,6 +131,6 @@
         <div id="footer-info">❤️ Atención espiritual personalizada con el Maestro Jacob.</div>
     </footer>
 
-    <script src="./js/consulta-commerce.js?v=profile-consulta-20260515"></script>
+    <script src="./js/consulta-commerce.js?v=payment-selector-20260515"></script>
 </body>
 </html>
