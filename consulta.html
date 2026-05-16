@@ -25,7 +25,7 @@
         <section class="consulta-hero">
             <p class="consulta-kicker">Consulta privada con pago validado</p>
             <h1>Agenda tu consulta con el Maestro Jacob</h1>
-            <p>Realiza el pago seguro por Wompi. Cuando Wompi confirme el pago, se habilita el formulario para enviar por WhatsApp el motivo de consulta, nombre y fecha de nacimiento.</p>
+            <p>Crea tu perfil de consulta con tus datos básicos y realiza el pago seguro por Wompi. No necesitas registrarte con contraseña.</p>
             <div class="consulta-price-card">
                 <span>Valor de la consulta</span>
                 <strong><span data-consulta-price-usd>USD $10</span></strong>
@@ -35,12 +35,12 @@
 
         <section class="consulta-grid">
             <article class="consulta-card consulta-card--form">
-                <h2>1. Paga la consulta</h2>
-                <p>Estos datos se usan únicamente para crear el checkout seguro en Wompi.</p>
+                <h2>1. Crea tu perfil y paga</h2>
+                <p>Estos datos forman tu perfil de consulta y se usan para crear el checkout seguro en Wompi.</p>
                 <form id="consulta-payment-form" class="consulta-form">
                     <label>
-                        Nombre para el pago
-                        <input type="text" name="customerName" autocomplete="name" minlength="2" required placeholder="Tu nombre">
+                        Nombre completo
+                        <input type="text" name="customerName" autocomplete="name" minlength="2" required placeholder="Tu nombre completo">
                     </label>
                     <label>
                         Correo electrónico
@@ -49,6 +49,10 @@
                     <label>
                         WhatsApp de contacto
                         <input type="tel" name="customerPhone" autocomplete="tel" minlength="5" required placeholder="+1 225 536 0731">
+                    </label>
+                    <label>
+                        Fecha de nacimiento
+                        <input type="date" name="birthDate" autocomplete="bday" required>
                     </label>
                     <button class="consulta-primary-button" type="submit">
                         <i class="fa-solid fa-lock"></i>
@@ -63,7 +67,7 @@
                 <ol class="consulta-steps">
                     <li>Wompi redirige a la página de confirmación.</li>
                     <li>Validamos que la transacción esté aprobada y que el valor corresponda a la consulta.</li>
-                    <li>Se habilita el formulario privado.</li>
+                    <li>Se carga tu perfil de consulta con los datos que ingresaste.</li>
                     <li>El botón de WhatsApp envía todos los datos al chat del Maestro Jacob.</li>
                 </ol>
                 <div class="consulta-warning">
@@ -77,6 +81,6 @@
         <div id="footer-info">❤️ Atención espiritual personalizada con el Maestro Jacob.</div>
     </footer>
 
-    <script src="./js/consulta-commerce.js?v=consulta-gate-20260515"></script>
+    <script src="./js/consulta-commerce.js?v=profile-consulta-20260515"></script>
 </body>
 </html>

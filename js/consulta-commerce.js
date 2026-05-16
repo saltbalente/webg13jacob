@@ -10,6 +10,7 @@
   }).format(CONSULTA_AMOUNT_COP);
 
   const PAID_ACCESS_KEY = 'jacob_consulta_payment_approved';
+  const PROFILE_KEY = 'jacob_consulta_customer';
   const $ = (selector) => document.querySelector(selector);
 
   function getPaidAccess() {
@@ -85,6 +86,10 @@
         customerEmail: formData.get('customerEmail'),
         customerPhone: formData.get('customerPhone')
       };
+      const profile = {
+        ...payload,
+        birthDate: formData.get('birthDate')
+      };
 
       try {
         if (submitButton) {
@@ -104,7 +109,7 @@
           throw new Error(data.error || 'No se pudo crear el pago en Wompi.');
         }
 
-        sessionStorage.setItem('jacob_consulta_customer', JSON.stringify(payload));
+        sessionStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
         sessionStorage.setItem('jacob_consulta_reference', data.reference || '');
         window.location.href = data.checkoutUrl;
       } catch (error) {
@@ -149,8 +154,10 @@
   function buildWhatsAppMessage(formData, reference, transactionId) {
     const name = formData.get('fullName');
     const birthDate = formData.get('birthDate');
+    const email = formData.get('customerEmail');
+    const phone = formData.get('customerPhone');
     const reason = formData.get('consultReason');
-    const customer = JSON.parse(sessionStorage.getItem('jacob_consulta_customer') || '{}');
+    const customer = JSON.parse(sessionStorage.getItem(PROFILE_KEY) || '{}');
 
     return [
       'Hola Maestro Jacob, ya realicé el pago de la consulta privada.',
@@ -159,7 +166,8 @@
       transactionId ? `Transacción: ${transactionId}` : '',
       `Nombre: ${name}`,
       `Fecha de nacimiento: ${birthDate}`,
-      customer.customerPhone ? `WhatsApp de contacto: ${customer.customerPhone}` : '',
+      `Correo: ${email || customer.customerEmail || ''}`,
+      `WhatsApp de contacto: ${phone || customer.customerPhone || ''}`,
       '',
       'Motivo de consulta:',
       reason
@@ -171,11 +179,17 @@
     const whatsappLink = $('#consulta-whatsapp-link');
     if (!form || !whatsappLink) return;
 
-    const customer = JSON.parse(sessionStorage.getItem('jacob_consulta_customer') || '{}');
-    if (customer.customerName) {
-      const nameField = form.querySelector('[name="fullName"]');
-      if (nameField && !nameField.value) nameField.value = customer.customerName;
-    }
+    const customer = JSON.parse(sessionStorage.getItem(PROFILE_KEY) || '{}');
+    const fieldMap = {
+      fullName: customer.customerName,
+      birthDate: customer.birthDate,
+      customerEmail: customer.customerEmail,
+      customerPhone: customer.customerPhone
+    };
+    Object.entries(fieldMap).forEach(([name, value]) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      if (field && value && !field.value) field.value = value;
+    });
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();

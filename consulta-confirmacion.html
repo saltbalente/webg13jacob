@@ -36,7 +36,7 @@
 
         <section id="consulta-approved-panel" class="consulta-card" data-confirmation-panel hidden>
             <h2>Pago aprobado ✅</h2>
-            <p>Ahora completa los datos de consulta. Al enviar, se activará el botón de WhatsApp con toda la información lista para el chat.</p>
+            <p>Confirmamos tu pago. Tu perfil de consulta se cargará automáticamente si lo completaste antes de pagar. Solo agrega o confirma el motivo de consulta.</p>
             <form id="consulta-after-payment-form" class="consulta-form">
                 <label>
                     Nombre completo
@@ -45,6 +45,14 @@
                 <label>
                     Fecha de nacimiento
                     <input type="date" name="birthDate" required>
+                </label>
+                <label>
+                    Correo electrónico
+                    <input type="email" name="customerEmail" autocomplete="email" required placeholder="correo@ejemplo.com">
+                </label>
+                <label>
+                    WhatsApp de contacto
+                    <input type="tel" name="customerPhone" autocomplete="tel" minlength="5" required placeholder="+1 225 536 0731">
                 </label>
                 <label>
                     Motivo de consulta
@@ -77,6 +85,6 @@
         <div id="footer-info">❤️ Atención espiritual personalizada con el Maestro Jacob.</div>
     </footer>
 
-    <script src="./js/consulta-commerce.js?v=consulta-gate-20260515"></script>
+    <script src="./js/consulta-commerce.js?v=profile-consulta-20260515"></script>
 </body>
 </html>
