@@ -80,7 +80,7 @@ const Utils = {
   hideWhatsAppUntilPaid() {
     if (this.hasPaidConsultationAccess()) return;
 
-    document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"], .phone-container, .whatsapp-form, #whatsapp-container').forEach((element) => {
+    document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach((element) => {
       element.hidden = true;
       element.setAttribute('aria-hidden', 'true');
     });
@@ -285,8 +285,8 @@ class WhatsAppForm {
       sendButton.addEventListener('click', this.handleFormSubmit.bind(this));
     }
 
-    // Botones de WhatsApp
-    const whatsappButtons = document.querySelectorAll('.whatsapp-button, .mystic-button[href*="whatsapp"], .boton-magico[href*="whatsapp"]');
+    // Botones que todavía apunten directamente a WhatsApp (compatibilidad con páginas antiguas).
+    const whatsappButtons = document.querySelectorAll('.whatsapp-button[href*="wa.me"], .mystic-button[href*="wa.me"], .boton-magico[href*="wa.me"]');
     whatsappButtons.forEach(button => {
       button.addEventListener('click', this.handleWhatsAppClick.bind(this));
     });
@@ -295,7 +295,7 @@ class WhatsAppForm {
     const whatsappContainer = document.getElementById('whatsapp-container');
     if (whatsappContainer) {
       whatsappContainer.addEventListener('click', () => {
-        window.open(Utils.generateWhatsAppUrl(), '_blank');
+        window.location.href = './consulta.html';
       });
     }
   }
@@ -316,16 +316,9 @@ class WhatsAppForm {
       return;
     }
     
-    const fullMessage = `Hola, soy ${name}. ${message}`;
-    const whatsappUrl = Utils.generateWhatsAppUrl(fullMessage);
+    window.location.href = './consulta.html';
     
-    window.open(whatsappUrl, '_blank');
-    
-    // Limpiar formulario
-    nameInput.value = '';
-    messageInput.value = '';
-    
-    this.showNotification('Redirigiendo a WhatsApp...', 'success');
+    this.showNotification('Redirigiendo al pago seguro...', 'success');
   }
 
   handleWhatsAppClick(event) {
