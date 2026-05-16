@@ -136,14 +136,20 @@
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok || !data.approvalUrl) {
-      if (data.error && data.error.includes('PayPal no está configurado')) {
+      const errorMessage = data.error || '';
+      const canUseManualFallback = [
+        'PayPal no está configurado',
+        'Client Authentication failed',
+        'No se pudo autenticar PayPal'
+      ].some((message) => errorMessage.includes(message));
+      if (canUseManualFallback) {
         return {
           approvalUrl: buildManualPayPalCheckoutUrl(profile, reference),
           orderId: '',
           manualFallback: true
         };
       }
-      throw new Error(data.error || 'No se pudo crear el pago en PayPal.');
+      throw new Error(errorMessage || 'No se pudo crear el pago en PayPal.');
     }
     if (data.orderId) {
       sessionStorage.setItem('jacob_consulta_paypal_order_id', data.orderId);
