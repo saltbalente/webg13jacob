@@ -53,7 +53,7 @@ Variables requeridas en Vercel:
 WOMPI_PUBLIC_KEY=pub_prod_...
 WOMPI_INTEGRITY_SECRET=prod_integrity_...
 CONSULTA_AMOUNT_COP=40000
-FRONTEND_URL=https://consultadebrujeria.services
+FRONTEND_URL=https://amarresdeamoryendulzamientos.brujero.org
 ```
 
 > El proyecto de `mkinnovador.com/tienda.html` no se modifica; este flujo clona/adapta el patrón de pago para este sitio.
