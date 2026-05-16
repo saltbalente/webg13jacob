@@ -934,12 +934,16 @@ section.container img {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  body {
+    padding-bottom: 86px;
+  }
+
   .header {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
   }
-  
+
   .main-container {
     padding: 1rem;
   }
@@ -956,59 +960,84 @@ section.container img {
   .home-slider-overlay {
     border-radius: 18px;
   }
-  
+
   .arcane-portal-wrapper {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 1rem;
   }
-  
+
   .arcane-main-title {
     font-size: 2rem;
   }
-  
+
   .arcane-description-text {
     padding: 1rem;
     font-size: 1.1rem;
   }
-  
+
+  .value-grid,
+  .consulta-includes {
+    grid-template-columns: 1fr;
+  }
+
+  .home-conversion-actions .consulta-primary-button,
+  .home-secondary-button,
+  .trust-chip-row span,
+  .private-consultation-card .consulta-primary-button {
+    width: 100%;
+  }
+
+  .private-consultation-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .private-consultation-card img {
+    margin: 0 auto;
+  }
+
   .contenedor-botones-misticos {
-    bottom: 1rem;
+    left: 1rem;
     right: 1rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
-  
+
   .boton-magico {
-    padding: 0.8rem 1.5rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    border-radius: 18px;
   }
-  
+
   .orb-magico {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
   }
-  
+
   .icono-magico {
     font-size: 1.2rem;
   }
-  
+
   .texto-boton {
     font-size: 0.9rem;
   }
-  
+
   .testimonials-container {
     grid-template-columns: 1fr;
     padding: 1rem;
   }
-  
+
   .masonry-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     padding: 1rem;
   }
-  
+
   .whatsapp-form {
     margin: 2rem 1rem;
     padding: 1.5rem;
   }
-  
+
   .whatsapp-form form {
     padding: 1.5rem;
   }
@@ -1033,20 +1062,38 @@ section.container img {
   .home-slider-button {
     width: 100%;
   }
-  
+
+  .home-conversion-intro {
+    border-radius: 22px;
+    padding: 1.2rem;
+  }
+
+  .trust-chip-row {
+    gap: 0.55rem;
+  }
+
+  .private-consultation-card {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .texto-boton {
+    font-size: 0.82rem;
+  }
+
   .description {
     padding: 1.5rem;
     font-size: 1rem;
   }
-  
+
   .mystic-title {
     font-size: 2rem;
   }
-  
+
   .mystic-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .mystic-button, .button, .whatsapp-button {
     padding: 1rem 1.5rem;
     font-size: 1rem;
@@ -1084,7 +1131,176 @@ section.container img {
   animation: slideIn 0.5s ease-out;
 }
 
-/* ===== CONSULTA PRIVADA / WOMPI ===== */
+/* ===== BLOQUES DE CONVERSIÓN HOME ===== */
+.home-conversion-intro,
+.value-grid,
+.private-consultation-card,
+.consulta-includes {
+  width: min(100%, 1100px);
+  margin: clamp(1.5rem, 4vw, 3rem) auto;
+}
+
+.home-conversion-intro {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.35rem, 4vw, 3rem);
+  border-radius: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.36);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.22), transparent 35%),
+    linear-gradient(145deg, rgba(17, 5, 5, 0.96), rgba(55, 0, 0, 0.92) 52%, rgba(3, 3, 8, 0.96));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.home-conversion-kicker {
+  margin: 0 0 0.75rem;
+  color: #fff3b0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.home-conversion-intro h2,
+.value-card h3,
+.private-consultation-card h2,
+.consulta-includes h2 {
+  font-family: var(--font-primary);
+  color: var(--gold-primary);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.28);
+}
+
+.home-conversion-intro h2 {
+  max-width: 860px;
+  margin: 0 auto 1rem;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  line-height: 1.04;
+}
+
+.home-conversion-intro p,
+.value-card,
+.private-consultation-card,
+.consulta-includes article {
+  color: #fff4d6;
+}
+
+.home-conversion-intro > p:not(.home-conversion-kicker) {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: clamp(1.02rem, 2.6vw, 1.22rem);
+}
+
+.home-conversion-actions,
+.trust-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+}
+
+.home-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.95rem 1.25rem;
+  border-radius: 999px;
+  color: var(--gold-primary);
+  border: 1px solid rgba(255, 215, 0, 0.48);
+  background: rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.trust-chip-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  color: #fff8df;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.value-grid,
+.consulta-includes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.6vw, 1.35rem);
+}
+
+.value-card,
+.consulta-includes article,
+.private-consultation-card {
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(15, 5, 5, 0.92), rgba(42, 0, 0, 0.82));
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.36);
+}
+
+.value-card,
+.consulta-includes article {
+  padding: clamp(1.1rem, 3vw, 1.55rem);
+}
+
+.value-card > i,
+.consulta-includes article > i {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 0.8rem;
+  border-radius: 15px;
+  color: #190000;
+  background: linear-gradient(135deg, #fff6bf, var(--gold-primary));
+}
+
+.value-card h3,
+.consulta-includes h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+}
+
+.value-card ul,
+.value-card ol,
+.private-consultation-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.value-card li,
+.private-consultation-card li {
+  margin: 0.42rem 0;
+}
+
+.private-consultation-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  align-items: center;
+  padding: clamp(1.2rem, 4vw, 2rem);
+}
+
+.private-consultation-card img {
+  width: 100%;
+  max-width: 110px;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(37, 211, 102, 0.25));
+}
+
+.private-consultation-card p {
+  color: #f9e7bb;
+  margin: 0.35rem 0 0.8rem;
+}
+
+.private-consultation-card .consulta-primary-button {
+  margin-top: 1rem;
+}
+
+/* ===== CONSULTA CHECKOUT ===== */
 .consulta-logo-link {
   text-decoration: none;
 }
@@ -1667,8 +1883,26 @@ section.container img {
   .consulta-grid,
   .consulta-form,
   .consulta-payment-selector,
-  .consulta-meta-grid {
+  .consulta-meta-grid,
+  .value-grid,
+  .consulta-includes {
     grid-template-columns: 1fr;
+  }
+
+  .home-conversion-actions .consulta-primary-button,
+  .home-secondary-button,
+  .trust-chip-row span,
+  .private-consultation-card .consulta-primary-button {
+    width: 100%;
+  }
+
+  .private-consultation-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .private-consultation-card img {
+    margin: 0 auto;
   }
 
   .consulta-card--summary {
@@ -1711,4 +1945,28 @@ section.container img {
   .consulta-hero h1 {
     font-size: clamp(1.85rem, 12vw, 3rem);
   }
+}
+
+/* Conversion polish overrides: unify old green payment-looking CTAs with the premium gold system. */
+a.more-info,
+.whatsapp-button,
+section#whatsapp-container {
+  background: linear-gradient(135deg, #fff6bf 0%, var(--gold-primary) 45%, #bf7a10 100%) !important;
+  color: #190000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 14px 30px rgba(255, 215, 0, 0.20);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.whatsapp-banner {
+  background: linear-gradient(135deg, rgba(32, 8, 8, 0.95), rgba(86, 8, 8, 0.90));
+  border: 1px solid rgba(255, 215, 0, 0.30);
+}
+
+.home-conversion-intro,
+.value-card,
+.private-consultation-card,
+.consulta-includes article {
+  text-shadow: none;
 }

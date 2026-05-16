@@ -85,8 +85,8 @@
     const buttonText = form.querySelector('[data-payment-button-text]');
     if (buttonText) {
       buttonText.textContent = method === 'paypal'
-        ? 'Pagar consulta segura con PayPal'
-        : 'Pagar consulta segura con Wompi';
+        ? 'Iniciar consulta segura con PayPal'
+        : 'Iniciar consulta segura con Wompi';
     }
   }
 
