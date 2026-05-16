@@ -147,6 +147,134 @@ background: url(https://blogger.googleusercontent.com/img/a/AVvXsEhsmHWTmOxMi-Mn
   animation: float 3s ease-in-out infinite;
 }
 
+/* ===== SLIDER MÍSTICO HOME ===== */
+.home-mystic-slider {
+  width: min(100%, 1080px);
+  margin: -1.5rem auto 3rem;
+  position: relative;
+}
+
+.home-slider-frame {
+  position: relative;
+  min-height: clamp(420px, 68vw, 680px);
+  border: 2px solid rgba(255, 215, 0, 0.65);
+  border-radius: 28px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.18), rgba(0, 0, 0, 0.92) 58%);
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.18), 0 24px 70px rgba(0, 0, 0, 0.62);
+  isolation: isolate;
+}
+
+.home-slider-frame::before,
+.home-slider-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.home-slider-frame::before {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 244, 184, 0.28), transparent 16%),
+    radial-gradient(circle at 84% 12%, rgba(255, 75, 75, 0.22), transparent 20%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.55));
+  mix-blend-mode: screen;
+}
+
+.home-slider-frame::after {
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.82), inset 0 -150px 130px rgba(0, 0, 0, 0.88);
+}
+
+.home-slider-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.025);
+  transition: opacity 700ms ease, transform 1200ms ease;
+  z-index: 1;
+}
+
+.home-slider-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.home-slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: saturate(1.12) contrast(1.05) brightness(0.9);
+}
+
+.home-slider-overlay {
+  position: absolute;
+  left: clamp(1rem, 4vw, 3rem);
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: clamp(1rem, 4vw, 3rem);
+  z-index: 4;
+  max-width: 640px;
+  padding: clamp(1rem, 3vw, 1.65rem);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.82), rgba(74, 8, 8, 0.72));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 28px rgba(255, 215, 0, 0.16);
+}
+
+.home-slider-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--gold-secondary);
+  font-family: var(--font-primary);
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home-slider-overlay h2 {
+  margin: 0 0 1rem;
+  color: #fff6bd;
+  font-family: var(--font-primary);
+  font-size: clamp(1.35rem, 4vw, 2.45rem);
+  line-height: 1.16;
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.32);
+}
+
+.home-slider-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd700, #ff8c00 60%, #b40f0f);
+  color: #1c0900;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.42);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-slider-button:hover,
+.home-slider-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(255, 215, 0, 0.68);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-slider-slide {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* ===== DESCRIPCIONES ===== */
 .description {
   font-family: var(--font-primary);
@@ -815,6 +943,19 @@ section.container img {
   .main-container {
     padding: 1rem;
   }
+
+  .home-mystic-slider {
+    margin: -0.5rem auto 2rem;
+  }
+
+  .home-slider-frame {
+    min-height: 520px;
+    border-radius: 20px;
+  }
+
+  .home-slider-overlay {
+    border-radius: 18px;
+  }
   
   .arcane-portal-wrapper {
     grid-template-columns: 1fr;
@@ -876,6 +1017,21 @@ section.container img {
 @media (max-width: 480px) {
   .titulo-dorado {
     font-size: 2rem;
+  }
+
+  .home-slider-frame {
+    min-height: 500px;
+    border-radius: 18px;
+  }
+
+  .home-slider-overlay {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .home-slider-button {
+    width: 100%;
   }
   
   .description {

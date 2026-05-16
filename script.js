@@ -519,6 +519,9 @@ class App {
     
     // Configurar smooth scroll
     this.setupSmoothScroll();
+
+    // Configurar slider automático del home
+    this.setupHomeMysticSlider();
     
     // Añadir efectos CSS adicionales
     this.addCSSAnimations();
@@ -549,6 +552,29 @@ class App {
         }
       });
     });
+  }
+
+  setupHomeMysticSlider() {
+    const slider = document.querySelector('[data-home-slider]');
+    if (!slider) return;
+
+    const slides = Array.from(slider.querySelectorAll('.home-slider-slide'));
+    if (slides.length <= 1) return;
+
+    let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const showSlide = (nextIndex) => {
+      slides[activeIndex].classList.remove('is-active');
+      activeIndex = nextIndex % slides.length;
+      slides[activeIndex].classList.add('is-active');
+    };
+
+    if (!reducedMotion) {
+      window.setInterval(() => {
+        showSlide(activeIndex + 1);
+      }, 4000);
+    }
   }
 
   addCSSAnimations() {
