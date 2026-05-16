@@ -1163,6 +1163,18 @@ section.container img {
   top: 104px;
 }
 
+.consulta-summary-image {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0.75rem 0 1.15rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
 .consulta-card-heading {
   display: flex;
   align-items: flex-start;
