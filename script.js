@@ -615,10 +615,12 @@ class App {
       if (floatingButtons) {
         if (scrolled > CONFIG.scrollThreshold) {
           floatingButtons.style.opacity = '1';
+          floatingButtons.style.pointerEvents = 'auto';
           floatingButtons.style.transform = 'translateY(0)';
         } else {
-          floatingButtons.style.opacity = '0.8';
-          floatingButtons.style.transform = 'translateY(10px)';
+          floatingButtons.style.opacity = '0';
+          floatingButtons.style.pointerEvents = 'none';
+          floatingButtons.style.transform = 'translateY(16px)';
         }
       }
     }, 16));
