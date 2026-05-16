@@ -97,13 +97,15 @@
     return `${prefix}-${timestamp}-${random}`;
   }
 
-  function buildPayPalCheckoutUrl(profile, reference) {
+  function buildManualPayPalCheckoutUrl(profile, reference) {
     const returnUrl = new URL('/consulta-confirmacion.html', window.location.origin);
     returnUrl.searchParams.set('provider', 'paypal');
     returnUrl.searchParams.set('ref', reference);
 
     const cancelUrl = new URL('/consulta.html', window.location.origin);
     cancelUrl.searchParams.set('payment', 'cancelled');
+    cancelUrl.searchParams.set('provider', 'paypal');
+    cancelUrl.searchParams.set('ref', reference);
 
     const paypalUrl = new URL('https://www.paypal.com/cgi-bin/webscr');
     paypalUrl.searchParams.set('cmd', '_xclick');
@@ -121,6 +123,32 @@
       phone: profile.customerPhone || ''
     }));
     return paypalUrl.toString();
+  }
+
+  async function createPayPalOrder(profile, reference) {
+    const response = await fetch('/api/paypal-create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...profile,
+        reference
+      })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.approvalUrl) {
+      if (data.error && data.error.includes('PayPal no está configurado')) {
+        return {
+          approvalUrl: buildManualPayPalCheckoutUrl(profile, reference),
+          orderId: '',
+          manualFallback: true
+        };
+      }
+      throw new Error(data.error || 'No se pudo crear el pago en PayPal.');
+    }
+    if (data.orderId) {
+      sessionStorage.setItem('jacob_consulta_paypal_order_id', data.orderId);
+    }
+    return data;
   }
 
   function initCheckoutPage() {
@@ -176,8 +204,9 @@
         if (paymentMethod === 'paypal') {
           const reference = createPaymentReference('paypal');
           sessionStorage.setItem('jacob_consulta_reference', reference);
-          showStatus(`Abriendo PayPal para pagar ${CONSULTA_USD_LABEL} a ${PAYPAL_EMAIL}...`, 'info');
-          window.location.href = buildPayPalCheckoutUrl(profile, reference);
+          showStatus(`Creando pago seguro de PayPal por ${CONSULTA_USD_LABEL}...`, 'info');
+          const paypalOrder = await createPayPalOrder(profile, reference);
+          window.location.href = paypalOrder.approvalUrl;
           return;
         }
 
@@ -213,6 +242,7 @@
     return {
       reference: params.get('ref') || params.get('reference') || sessionStorage.getItem('jacob_consulta_reference') || '',
       transactionId: params.get('id') || params.get('transaction_id') || '',
+      paypalOrderId: params.get('token') || params.get('order_id') || sessionStorage.getItem('jacob_consulta_paypal_order_id') || '',
       provider: params.get('provider') || params.get('payment_method') || sessionStorage.getItem('jacob_consulta_payment_method') || 'wompi'
     };
   }
@@ -223,6 +253,20 @@
     if (!response.ok) return null;
     const payload = await response.json();
     return payload.data || null;
+  }
+
+  async function capturePayPalOrder(orderId, reference) {
+    if (!orderId) return null;
+    const response = await fetch('/api/paypal-capture-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId, reference })
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.approved) {
+      throw new Error(payload.error || 'PayPal todavía no confirmó el pago.');
+    }
+    return payload;
   }
 
   function showPanel(id) {
@@ -292,14 +336,32 @@
   async function initConfirmationPage() {
     if (!$('#consulta-confirmation-page')) return;
 
-    const { reference, transactionId, provider } = getConfirmationParams();
+    const { reference, transactionId, paypalOrderId, provider } = getConfirmationParams();
     setText('[data-consulta-reference]', reference || 'No recibida');
     setText('[data-consulta-amount]', `${CONSULTA_USD_LABEL} (${COP_LABEL})`);
 
-    if (provider === 'paypal' && !transactionId) {
-      showPanel('consulta-pending-panel');
-      showStatus(`Si ya pagaste por PayPal a ${PAYPAL_EMAIL}, guarda la referencia ${reference || 'generada'} y espera la confirmación manual del pago.`, 'info');
-      return;
+    if (provider === 'paypal') {
+      if (!paypalOrderId) {
+        showPanel('consulta-pending-panel');
+        showStatus('PayPal no devolvió el ID de orden. Si ya pagaste, conserva la referencia y contacta al maestro para validación manual.', 'info');
+        return;
+      }
+
+      try {
+        showStatus('Validando el pago aprobado por PayPal...', 'info');
+        const paypalPayment = await capturePayPalOrder(paypalOrderId, reference);
+        const approvedReference = paypalPayment.reference || reference;
+        const paypalTransactionId = paypalPayment.captureId || paypalPayment.orderId;
+        savePaidAccess(approvedReference, paypalTransactionId);
+        showPanel('consulta-approved-panel');
+        initApprovedConsultationForm(approvedReference, paypalTransactionId);
+        showStatus('Pago PayPal aprobado y validado. Ahora completa los datos de consulta.', 'success');
+        return;
+      } catch (error) {
+        showPanel('consulta-pending-panel');
+        showStatus(error.message || 'No se pudo validar PayPal en este momento. Actualiza esta página para intentar de nuevo.', 'error');
+        return;
+      }
     }
 
     if (!transactionId) {
