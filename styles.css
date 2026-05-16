@@ -935,11 +935,15 @@ section.container img {
 
 .consulta-home-cta,
 .consulta-hero,
-.consulta-card {
-  background: linear-gradient(135deg, rgba(10, 0, 0, 0.94), rgba(70, 0, 0, 0.88));
-  border: 2px solid rgba(255, 215, 0, 0.72);
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.18), inset 0 0 25px rgba(255, 215, 0, 0.08);
-  border-radius: 22px;
+.consulta-card,
+.consulta-progress {
+  border: 1px solid rgba(255, 215, 0, 0.34);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(17, 5, 5, 0.96), rgba(45, 0, 0, 0.92) 48%, rgba(3, 3, 8, 0.94));
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .consulta-home-cta {
@@ -959,7 +963,7 @@ section.container img {
 .consulta-card h2 {
   font-family: var(--font-primary);
   color: var(--gold-primary);
-  text-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.30);
 }
 
 .consulta-home-cta h2 {
@@ -971,7 +975,7 @@ section.container img {
 .consulta-hero p,
 .consulta-card p,
 .consulta-steps {
-  color: #ffe9aa;
+  color: #f9e7bb;
   font-size: 1.05rem;
 }
 
@@ -979,57 +983,226 @@ section.container img {
   color: #fff3b0;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.12em;
+  margin: 0.85rem 0 0.75rem;
 }
 
 .consulta-page {
-  max-width: 1100px;
+  max-width: 1120px;
+  padding-top: clamp(1rem, 3vw, 2rem);
 }
 
 .consulta-hero {
-  padding: clamp(1.5rem, 4vw, 3rem);
-  margin: 2rem auto;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.6rem, 5vw, 3.35rem);
+  margin: 1.3rem auto 1.15rem;
   text-align: center;
 }
 
+.consulta-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto -8% -45% -8%;
+  height: 56%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.20), transparent 62%);
+  pointer-events: none;
+}
+
+.consulta-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.consulta-hero h1 {
+  max-width: 850px;
+  margin: 0 auto 1rem;
+  font-size: clamp(2rem, 7vw, 4.35rem);
+  line-height: 0.96;
+}
+
+.consulta-hero > p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #fff8df;
+}
+
 .consulta-hero--compact {
-  max-width: 840px;
+  max-width: 920px;
+}
+
+.consulta-secure-badge,
+.consulta-trust-list span,
+.consulta-form-note,
+.consulta-meta-grid p {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.consulta-secure-badge {
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  border-radius: 999px;
+  color: #190000;
+  background: linear-gradient(135deg, #fff6bf, var(--gold-primary));
+  font-weight: 900;
+  box-shadow: 0 10px 28px rgba(255, 215, 0, 0.18);
+}
+
+.consulta-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.45rem;
 }
 
 .consulta-price-card {
   display: inline-flex;
   flex-direction: column;
-  gap: 0.25rem;
-  margin-top: 1.5rem;
-  padding: 1rem 1.4rem;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 215, 0, 0.45);
+  gap: 0.15rem;
+  min-width: min(100%, 250px);
+  padding: 1rem 1.3rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.54);
+  border: 1px solid rgba(255, 215, 0, 0.46);
 }
 
 .consulta-price-card strong {
-  font-size: 2.2rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1;
   color: var(--gold-primary);
+}
+
+.consulta-price-card small,
+.consulta-progress-step small,
+.consulta-form-note {
+  color: #f2dfad;
+}
+
+.consulta-trust-list {
+  display: grid;
+  gap: 0.55rem;
+  text-align: left;
+}
+
+.consulta-trust-list span {
+  justify-content: flex-start;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  color: #fff8df;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.consulta-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr) 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  margin: 0 auto 1.2rem;
+}
+
+.consulta-progress-step {
+  display: grid;
+  justify-items: center;
+  gap: 0.22rem;
+  text-align: center;
+}
+
+.consulta-progress-step span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #f9e7bb;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.30);
+  font-weight: 900;
+}
+
+.consulta-progress-step strong {
+  color: #fff8df;
+}
+
+.consulta-progress-step.is-active span,
+.consulta-progress-step.is-done span,
+.consulta-progress-line.is-done {
+  color: #190000;
+  background: linear-gradient(135deg, #fff2a8, var(--gold-primary));
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.22);
+}
+
+.consulta-progress-line {
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12), rgba(255, 215, 0, 0.36));
 }
 
 .consulta-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
+  gap: 1.25rem;
   align-items: start;
 }
 
 .consulta-card {
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.2rem, 3vw, 2rem);
 }
 
 .consulta-card--form {
   min-height: 100%;
 }
 
+.consulta-card--summary {
+  position: sticky;
+  top: 104px;
+}
+
+.consulta-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.95rem;
+  margin-bottom: 1.15rem;
+}
+
+.consulta-card-heading h2 {
+  margin-bottom: 0.25rem;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+}
+
+.consulta-card-heading p {
+  margin: 0;
+  color: #f2dfad;
+}
+
+.consulta-icon-pill {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  color: #190000;
+  background: linear-gradient(135deg, #fff6bf, var(--gold-primary));
+  box-shadow: 0 12px 26px rgba(255, 215, 0, 0.18);
+}
+
+.consulta-icon-pill--success {
+  background: linear-gradient(135deg, #c9ffd9, var(--green-whatsapp));
+}
+
+.consulta-icon-pill--danger {
+  background: linear-gradient(135deg, #ffd7d7, #ff6b6b);
+}
+
 .consulta-form {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: 1.25rem;
 }
@@ -1038,24 +1211,45 @@ section.container img {
   display: grid;
   gap: 0.45rem;
   color: #fff3b0;
-  font-weight: 700;
+  font-weight: 800;
+}
+
+.consulta-form label:has(textarea),
+.consulta-form button,
+.consulta-form-note {
+  grid-column: 1 / -1;
 }
 
 .consulta-form input,
 .consulta-form textarea {
   width: 100%;
-  border: 1px solid rgba(255, 215, 0, 0.5);
-  border-radius: 12px;
-  padding: 0.85rem 1rem;
-  background: rgba(0, 0, 0, 0.72);
+  min-height: 50px;
+  border: 1px solid rgba(255, 215, 0, 0.44);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  background: rgba(0, 0, 0, 0.66);
   color: #fff;
   font: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.consulta-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.consulta-form input::placeholder,
+.consulta-form textarea::placeholder {
+  color: rgba(255, 248, 223, 0.48);
 }
 
 .consulta-form input:focus,
 .consulta-form textarea:focus {
-  outline: 2px solid rgba(255, 215, 0, 0.72);
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.18);
+  outline: none;
+  border-color: var(--gold-primary);
+  background: rgba(0, 0, 0, 0.82);
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.18), 0 0 24px rgba(255, 215, 0, 0.12);
 }
 
 .consulta-primary-button,
@@ -1065,20 +1259,22 @@ section.container img {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
+  min-height: 54px;
   border-radius: 999px;
-  padding: 0.95rem 1.35rem;
-  font-weight: 800;
+  padding: 1rem 1.35rem;
+  font-weight: 900;
   text-decoration: none;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
+  letter-spacing: 0.02em;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .consulta-primary-button {
-  background: linear-gradient(45deg, #8B0000, var(--gold-primary), #8B0000);
+  background: linear-gradient(135deg, #fff6bf 0%, var(--gold-primary) 42%, #bf7a10 100%);
   color: #190000;
-  border-color: rgba(255, 215, 0, 0.85);
-  box-shadow: 0 0 22px rgba(255, 215, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 34px rgba(255, 215, 0, 0.22), 0 0 0 1px rgba(255, 215, 0, 0.14);
 }
 
 .consulta-primary-button:hover,
@@ -1096,38 +1292,80 @@ section.container img {
 
 .consulta-secondary-button {
   color: var(--gold-primary);
-  border-color: rgba(255, 215, 0, 0.65);
-  background: rgba(0, 0, 0, 0.5);
-  margin-right: 0.75rem;
+  border-color: rgba(255, 215, 0, 0.55);
+  background: rgba(0, 0, 0, 0.58);
+  margin-top: 1rem;
 }
 
 .consulta-whatsapp-button {
   color: #062b14;
-  background: linear-gradient(45deg, var(--green-whatsapp), #b8ffd2);
+  background: linear-gradient(135deg, #d2ffe0, var(--green-whatsapp));
   margin-top: 1rem;
 }
 
+.consulta-form-note {
+  margin: -0.15rem 0 0;
+  justify-content: flex-start;
+  font-size: 0.92rem;
+}
+
 .consulta-steps {
-  padding-left: 1.25rem;
+  counter-reset: consulta-step;
+  list-style: none;
+  padding: 0;
   display: grid;
-  gap: 0.7rem;
+  gap: 0.8rem;
+}
+
+.consulta-steps li {
+  counter-increment: consulta-step;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.consulta-steps li::before {
+  content: counter(consulta-step);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #190000;
+  background: linear-gradient(135deg, #fff6bf, var(--gold-primary));
+  font-weight: 900;
 }
 
 .consulta-warning {
   margin-top: 1.25rem;
   padding: 1rem;
-  border-radius: 14px;
+  border-radius: 18px;
   color: #fff3b0;
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.35);
+  background: rgba(255, 215, 0, 0.10);
+  border: 1px solid rgba(255, 215, 0, 0.28);
+}
+
+.consulta-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.consulta-meta-grid p {
+  padding: 0.85rem;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(255, 215, 0, 0.28);
 }
 
 .consulta-status {
   margin-top: 1rem;
-  padding: 0.9rem 1rem;
-  border-radius: 12px;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
   border: 1px solid rgba(255, 215, 0, 0.35);
-  background: rgba(0, 0, 0, 0.48);
+  background: rgba(0, 0, 0, 0.58);
   color: #ffe9aa;
 }
 
@@ -1146,13 +1384,54 @@ section.container img {
 }
 
 @media (max-width: 820px) {
-  .consulta-grid {
+  .consulta-page {
+    padding: 1rem;
+  }
+
+  .consulta-grid,
+  .consulta-form,
+  .consulta-meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .consulta-card--summary {
+    position: static;
+  }
+
+  .consulta-progress {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .consulta-progress-line {
+    width: 2px;
+    height: 18px;
+    justify-self: center;
+  }
+
+  .consulta-trust-list {
+    width: 100%;
+  }
+
+  .consulta-trust-list span {
+    justify-content: center;
   }
 
   .consulta-secondary-button,
   .consulta-whatsapp-button,
   .consulta-primary-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .consulta-card-heading {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .consulta-hero h1 {
+    font-size: clamp(1.85rem, 12vw, 3rem);
   }
 }

@@ -7,7 +7,7 @@
     <meta name="robots" content="index,follow">
     <title>Consulta privada con el Maestro Jacob | Pago seguro Wompi</title>
     <link rel="canonical" href="https://amarresdeamoryendulzamientos.brujero.org/consulta.html">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=consulta-ui-20260515">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -23,20 +23,56 @@
 
     <main class="main-container consulta-page">
         <section class="consulta-hero">
+            <div class="consulta-secure-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                Pago seguro por Wompi
+            </div>
             <p class="consulta-kicker">Consulta privada con pago validado</p>
             <h1>Agenda tu consulta con el Maestro Jacob</h1>
             <p>Crea tu perfil de consulta con tus datos básicos y realiza el pago seguro por Wompi. No necesitas registrarte con contraseña.</p>
-            <div class="consulta-price-card">
-                <span>Valor de la consulta</span>
-                <strong><span data-consulta-price-usd>USD $10</span></strong>
-                <small>Se cobra en Wompi como <span data-consulta-price-cop>$40.000 COP</span>.</small>
+            <div class="consulta-hero-actions">
+                <div class="consulta-price-card">
+                    <span>Valor de la consulta</span>
+                    <strong><span data-consulta-price-usd>USD $10</span></strong>
+                    <small>Se cobra en Wompi como <span data-consulta-price-cop>$40.000 COP</span>.</small>
+                </div>
+                <div class="consulta-trust-list" aria-label="Garantías del pago">
+                    <span><i class="fa-solid fa-lock"></i> Sin contraseña</span>
+                    <span><i class="fa-solid fa-credit-card"></i> Checkout cifrado</span>
+                    <span><i class="fa-solid fa-user-shield"></i> Datos privados</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="consulta-progress" aria-label="Proceso de consulta">
+            <div class="consulta-progress-step is-active">
+                <span>1</span>
+                <strong>Perfil</strong>
+                <small>Datos básicos</small>
+            </div>
+            <div class="consulta-progress-line"></div>
+            <div class="consulta-progress-step">
+                <span>2</span>
+                <strong>Pago</strong>
+                <small>Wompi seguro</small>
+            </div>
+            <div class="consulta-progress-line"></div>
+            <div class="consulta-progress-step">
+                <span>3</span>
+                <strong>Consulta</strong>
+                <small>Envío por WhatsApp</small>
             </div>
         </section>
 
         <section class="consulta-grid">
             <article class="consulta-card consulta-card--form">
-                <h2>1. Crea tu perfil y paga</h2>
-                <p>Estos datos forman tu perfil de consulta y se usan para crear el checkout seguro en Wompi.</p>
+                <div class="consulta-card-heading">
+                    <span class="consulta-icon-pill"><i class="fa-solid fa-user-plus"></i></span>
+                    <div>
+                        <h2>1. Crea tu perfil y paga</h2>
+                        <p>Estos datos forman tu perfil de consulta y se usan para crear el checkout seguro en Wompi.</p>
+                    </div>
+                </div>
                 <form id="consulta-payment-form" class="consulta-form">
                     <label>
                         Nombre completo
@@ -58,12 +94,22 @@
                         <i class="fa-solid fa-lock"></i>
                         Pagar consulta segura con Wompi
                     </button>
+                    <p class="consulta-form-note">
+                        <i class="fa-solid fa-circle-info"></i>
+                        No creamos cuenta ni pedimos contraseña. Tu perfil se usa únicamente para esta consulta.
+                    </p>
                 </form>
                 <p id="consulta-status" class="consulta-status" hidden></p>
             </article>
 
-            <aside class="consulta-card">
-                <h2>2. Después de pagar</h2>
+            <aside class="consulta-card consulta-card--summary">
+                <div class="consulta-card-heading">
+                    <span class="consulta-icon-pill"><i class="fa-solid fa-list-check"></i></span>
+                    <div>
+                        <h2>2. Después de pagar</h2>
+                        <p>Validamos el pago antes de abrir el envío final al Maestro Jacob.</p>
+                    </div>
+                </div>
                 <ol class="consulta-steps">
                     <li>Wompi redirige a la página de confirmación.</li>
                     <li>Validamos que la transacción esté aprobada y que el valor corresponda a la consulta.</li>
