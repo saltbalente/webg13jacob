@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paga una consulta espiritual privada con el Maestro Jacob por Wompi. Después de validar el pago, envía tus datos de consulta por WhatsApp.">
+    <meta name="robots" content="index,follow">
+    <title>Consulta privada con el Maestro Jacob | Pago seguro Wompi</title>
+    <link rel="canonical" href="https://consultadebrujeria.services/consulta.html">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <a class="logo consulta-logo-link" href="./index.html">BRUJO EXPERTO</a>
+        <div class="phone-container">
+            <a class="phone-link" href="https://wa.me/12253607317?text=HOLA%20BRUJO%20JACOB">+1 (225) 536-0731</a>
+            <div class="call-icon"><i class="fab fa-whatsapp"></i></div>
+        </div>
+        <div class="description2">Pago seguro Wompi</div>
+    </header>
+
+    <main class="main-container consulta-page">
+        <section class="consulta-hero">
+            <p class="consulta-kicker">Consulta privada con pago validado</p>
+            <h1>Agenda tu consulta con el Maestro Jacob</h1>
+            <p>Realiza el pago seguro por Wompi. Cuando Wompi confirme el pago, se habilita el formulario para enviar por WhatsApp el motivo de consulta, nombre y fecha de nacimiento.</p>
+            <div class="consulta-price-card">
+                <span>Valor de la consulta</span>
+                <strong><span data-consulta-price-usd>USD $10</span></strong>
+                <small>Se cobra en Wompi como <span data-consulta-price-cop>$40.000 COP</span>.</small>
+            </div>
+        </section>
+
+        <section class="consulta-grid">
+            <article class="consulta-card consulta-card--form">
+                <h2>1. Paga la consulta</h2>
+                <p>Estos datos se usan únicamente para crear el checkout seguro en Wompi.</p>
+                <form id="consulta-payment-form" class="consulta-form">
+                    <label>
+                        Nombre para el pago
+                        <input type="text" name="customerName" autocomplete="name" minlength="2" required placeholder="Tu nombre">
+                    </label>
+                    <label>
+                        Correo electrónico
+                        <input type="email" name="customerEmail" autocomplete="email" required placeholder="correo@ejemplo.com">
+                    </label>
+                    <label>
+                        WhatsApp de contacto
+                        <input type="tel" name="customerPhone" autocomplete="tel" minlength="5" required placeholder="+1 225 536 0731">
+                    </label>
+                    <button class="consulta-primary-button" type="submit">
+                        <i class="fa-solid fa-lock"></i>
+                        Pagar consulta segura con Wompi
+                    </button>
+                </form>
+                <p id="consulta-status" class="consulta-status" hidden></p>
+            </article>
+
+            <aside class="consulta-card">
+                <h2>2. Después de pagar</h2>
+                <ol class="consulta-steps">
+                    <li>Wompi redirige a la página de confirmación.</li>
+                    <li>Validamos que la transacción esté aprobada y que el valor corresponda a la consulta.</li>
+                    <li>Se habilita el formulario privado.</li>
+                    <li>El botón de WhatsApp envía todos los datos al chat del Maestro Jacob.</li>
+                </ol>
+                <div class="consulta-warning">
+                    <strong>Importante:</strong> si el pago queda pendiente, el formulario no se muestra hasta que Wompi marque la transacción como aprobada.
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div id="footer-info">❤️ Atención espiritual personalizada con el Maestro Jacob.</div>
+    </footer>
+
+    <script src="./js/consulta-commerce.js"></script>
+</body>
+</html>

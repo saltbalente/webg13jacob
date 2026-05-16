@@ -38,6 +38,26 @@ El sitio está desplegado automáticamente en Vercel: [Ver Demo](https://webg13j
 2. Conecta tu repositorio con Vercel
 3. Configura el dominio personalizado si es necesario
 
+## 💳 Consulta privada con Wompi
+
+El proyecto incluye un flujo de consulta pagada en:
+
+- `consulta.html`: crea el checkout seguro de Wompi para una consulta de **USD $10** cobrada como **$40.000 COP**.
+- `api/wompi-checkout.js`: firma el pago con Wompi desde una función serverless de Vercel.
+- `consulta-confirmacion.html`: valida la transacción aprobada en Wompi y solo entonces muestra el formulario de motivo, nombre y fecha de nacimiento.
+- `js/consulta-commerce.js`: prepara el mensaje final para WhatsApp al número configurado del Maestro Jacob.
+
+Variables requeridas en Vercel:
+
+```bash
+WOMPI_PUBLIC_KEY=pub_prod_...
+WOMPI_INTEGRITY_SECRET=prod_integrity_...
+CONSULTA_AMOUNT_COP=40000
+FRONTEND_URL=https://consultadebrujeria.services
+```
+
+> El proyecto de `mkinnovador.com/tienda.html` no se modifica; este flujo clona/adapta el patrón de pago para este sitio.
+
 ## 📁 Estructura del Proyecto
 
 ```
